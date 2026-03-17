@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebAPIDeepDive.Models.Validations;
 
 namespace WebAPIDeepDive.Models
 {
@@ -17,6 +18,7 @@ namespace WebAPIDeepDive.Models
         [Required]
         public string? Color { get; set; }
 
+        [Shirt_EnsureCorrectSizing]
         public int? Size { get; set; }
 
         [Required]
