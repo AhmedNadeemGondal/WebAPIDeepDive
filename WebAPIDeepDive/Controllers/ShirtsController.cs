@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using WebAPIDeepDive.Models;
+using WebAPIDeepDive.Models.Repositories;
 
 // SUMMARY: IActionResult vs. ActionResult vs. ActionResult<T>
 // -----------------------------------------------------------------------------------------
@@ -46,13 +47,7 @@ namespace WebAPIDeepDive.Controllers
     // this results in /api/[whatever is in the verd attribute]
     public class ShirtsController : ControllerBase
     {
-        private List<Shirt> shirts =
-        [
-            new Shirt { ShirtId = 1, Brand = "Nike", Color = "Blue", Size = 10, Gender = "Men", price = 25.99 },
-            new Shirt { ShirtId = 2, Brand = "Adidas", Color = "Black", Size = 8, Gender = "Women", price = 30.00 },
-            new Shirt { ShirtId = 3, Brand = "Puma", Color = "White", Size = 12, Gender = "Men", price = 19.50 },
-            new Shirt { ShirtId = 4, Brand = "Reebok", Color = "Red", Size = 6, Gender = "Women", price = 22.00 }
-        ];
+
 
         [HttpGet]
         //[Route("/shirts")] // Explicit routing not convention based
@@ -75,7 +70,7 @@ namespace WebAPIDeepDive.Controllers
         {
             if (id <= 0) return BadRequest();
 
-            var shirt = shirts.FirstOrDefault(x => x.ShirtId == id);
+            var shirt = ShirtRepository.GetShirtById(id);
             if (shirt == null)
             {
                 return NotFound();
