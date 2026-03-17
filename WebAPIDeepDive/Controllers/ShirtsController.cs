@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebAPIDeepDive.Models;
 
 namespace WebAPIDeepDive.Controllers
 {
@@ -32,7 +33,9 @@ namespace WebAPIDeepDive.Controllers
 
         [HttpPost]
         //[Route("/shirts")]
-        public string CreateShirt()
+        public string CreateShirt([FromBody]Shirt shirt) // This binds the complex type
+                                                         // using it's class definition
+        //public string CreateShirt([FromForm] Shirt shirt)
         {
             return $"Creating a shirt";
         }
